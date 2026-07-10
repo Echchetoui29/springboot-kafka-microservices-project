@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class OrderController {
 
 
-    private final AtomicLong id = new AtomicLong();
+    private final AtomicLong sequence = new AtomicLong();
     private final KafkaTemplate<Long, Order> kafkaTemplate;
     private final StreamsBuilderFactoryBean kafkaStreamsFactory;
 
@@ -41,8 +41,9 @@ public class OrderController {
     @PostMapping
     public Order create(@RequestBody Order order) {
         validate(order);
-        order.setId(id.incrementAndGet());
+        order.setId(nextId());
         order.setStatus(OrderStatus.NEW);
+        order.setCreatedAt(System.currentTimeMillis());
         log.info("Sent: {}", order);
         try {
             return kafkaTemplate.send(Topics.ORDERS, order.getId(), order).get().getProducerRecord().value();
@@ -74,6 +75,10 @@ public class OrderController {
                 .store(StoreQueryParameters.fromNameAndType(
                         Topics.ORDERS,
                         QueryableStoreTypes.keyValueStore()));
+    }
+
+    private long nextId() {
+        return System.currentTimeMillis() * 1000 + (sequence.incrementAndGet() % 1000);
     }
 
     private void validate(Order order) {

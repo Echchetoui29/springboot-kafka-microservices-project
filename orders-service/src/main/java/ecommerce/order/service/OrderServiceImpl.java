@@ -21,6 +21,7 @@ public class OrderServiceImpl implements OrderService{
                 .productId(orderPayment.getProductId())
                 .productCount(orderPayment.getProductCount())
                 .price(orderPayment.getPrice())
+                .createdAt(orderPayment.getCreatedAt())
                 .build();
 
         if (orderPayment.getStatus().equals(ACCEPT) &&

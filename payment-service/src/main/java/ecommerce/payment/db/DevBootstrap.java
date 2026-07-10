@@ -25,6 +25,11 @@ public class DevBootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        if (repository.count() > 0) {
+            log.info("Customers already seeded, skipping");
+            return;
+        }
+
         Customer p1=Customer.builder().name("John Doe")
                 .amountAvailable(4000)
                 .amountReserved(0)

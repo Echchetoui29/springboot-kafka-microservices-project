@@ -16,6 +16,7 @@ public class Order {
     private int price;
     private OrderStatus status;
     private OrderSource source;
+    private Long createdAt;
 
     @Override
     public String toString() {
@@ -27,6 +28,7 @@ public class Order {
                 ", price=" + price +
                 ", status=" + status +
                 ", source=" + source +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }
