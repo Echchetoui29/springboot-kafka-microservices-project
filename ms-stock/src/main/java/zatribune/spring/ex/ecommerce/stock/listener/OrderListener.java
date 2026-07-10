@@ -19,7 +19,7 @@ public class OrderListener {
         this.orderService = orderService;
     }
 
-    @KafkaListener(id = KafkaIds.ORDERS, topics = Topics.ORDERS, groupId = KafkaGroupIds.STOCK)
+    @KafkaListener(id = Topics.ORDERS, topics = Topics.ORDERS, groupId = KafkaGroupIds.STOCK)
     public void onEvent(Order o) {
         log.info("Received: {}" , o);
         if (o.getStatus().equals(OrderStatus.NEW))

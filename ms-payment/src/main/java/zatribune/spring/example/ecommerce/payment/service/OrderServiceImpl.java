@@ -29,12 +29,12 @@ public class OrderServiceImpl implements OrderService{
     public void reserve(Order order) {
         Customer customer = repository.findById(order.getCustomerId()).orElseThrow();
         log.info("reserve order [{}] , for customer[{}]",order.getId(), customer);
-        if (order.getPrice() < customer.getAmountAvailable()) {
+        if (order.getPrice() <= customer.getAmountAvailable()) {
             order.setStatus(ACCEPT);
             customer.setAmountReserved(customer.getAmountReserved() + order.getPrice());
             customer.setAmountAvailable(customer.getAmountAvailable() - order.getPrice());
         } else {
-            order.setStatus(REJECTED);
+            order.setStatus(REJECT);
         }
         order.setSource(SOURCE);
         repository.save(customer);

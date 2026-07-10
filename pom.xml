@@ -19,6 +19,10 @@
         <module>ms-stock</module>
     </modules>
 
+    <properties>
+        <lombok.version>1.18.32</lombok.version>
+    </properties>
+
 
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService{
         Product product = repository.findById(order.getProductId()).orElseThrow();
         log.info("Found: {}", product);
         if (order.getStatus().equals(OrderStatus.NEW)) {
-            if (order.getProductCount() < product.getAvailableItems()) {
+            if (order.getProductCount() <= product.getAvailableItems()) {
                 product.setReservedItems(product.getReservedItems() + order.getProductCount());
                 product.setAvailableItems(product.getAvailableItems() - order.getProductCount());
                 order.setStatus(OrderStatus.ACCEPT);

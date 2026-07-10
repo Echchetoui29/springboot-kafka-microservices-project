@@ -21,7 +21,7 @@ public class OrderListener {
     }
 
 
-    @KafkaListener(id = KafkaIds.ORDERS, topics = Topics.ORDERS, groupId = KafkaGroupIds.PAYMENTS)
+    @KafkaListener(id = Topics.ORDERS, topics = Topics.ORDERS, groupId = KafkaGroupIds.PAYMENTS)
     public void onEvent(Order o) {
         log.info("Received: {}" , o);
         if (o.getStatus().equals(OrderStatus.NEW))
