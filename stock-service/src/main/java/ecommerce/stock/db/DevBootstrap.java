@@ -30,22 +30,22 @@ public class DevBootstrap implements CommandLineRunner {
             return;
         }
 
-        Product p1=Product.builder().name("Chicken")
+        Product p1=Product.builder().name("Loubia")
                 .availableItems(5000)
                 .reservedItems(0)
                 .build();
 
-        Product p2=Product.builder().name("Rice")
+        Product p2=Product.builder().name("Tanjia")
                 .availableItems(3500)
                 .reservedItems(0)
                 .build();
 
-        Product p3=Product.builder().name("Spaghetti")
+        Product p3=Product.builder().name("Tajine")
                 .availableItems(100)
                 .reservedItems(0)
                 .build();
 
-        Product p4=Product.builder().name("Salad")
+        Product p4=Product.builder().name("couscous")
                 .availableItems(120)
                 .reservedItems(0)
                 .build();
