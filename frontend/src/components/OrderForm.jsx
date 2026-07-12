@@ -7,7 +7,7 @@ import { useToast } from "./ToastProvider";
 const POLL_INTERVAL_MS = 1500;
 const POLL_MAX_ATTEMPTS = 20;
 
-export default function OrderForm({ onOrderCreated }) {
+export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
   const showToast = useToast();
   const [customers, setCustomers] = useState([]);
   const [products, setProducts] = useState([]);
@@ -21,7 +21,7 @@ export default function OrderForm({ onOrderCreated }) {
   useEffect(() => {
     getCustomers().then(setCustomers).catch((e) => showToast(`Failed to load customers: ${e.message}`));
     getProducts().then(setProducts).catch((e) => showToast(`Failed to load products: ${e.message}`));
-  }, [showToast]);
+  }, [showToast, catalogRefreshKey]);
 
   async function pollUntilFinal(id) {
     for (let attempt = 0; attempt < POLL_MAX_ATTEMPTS; attempt++) {

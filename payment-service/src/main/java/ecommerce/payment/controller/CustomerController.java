@@ -28,4 +28,17 @@ public class CustomerController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @PostMapping
+    public Customer create(@RequestBody Customer customer) {
+        if (customer.getName() == null || customer.getName().isBlank()) {
+            throw new IllegalArgumentException("name is required");
+        }
+        if (customer.getAmountAvailable() < 0) {
+            throw new IllegalArgumentException("amountAvailable must be >= 0");
+        }
+        customer.setId(null);
+        customer.setAmountReserved(0);
+        return repository.save(customer);
+    }
 }

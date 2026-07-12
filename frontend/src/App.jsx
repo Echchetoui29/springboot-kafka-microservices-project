@@ -1,15 +1,22 @@
 import { useState } from "react";
 import CustomerList from "./components/CustomerList";
 import ProductList from "./components/ProductList";
+import CustomerForm from "./components/CustomerForm";
+import ProductForm from "./components/ProductForm";
 import OrderForm from "./components/OrderForm";
 import OrderList from "./components/OrderList";
 import "./App.css";
 
 function App() {
-  const [refreshKey, setRefreshKey] = useState(0);
+  const [ordersRefreshKey, setOrdersRefreshKey] = useState(0);
+  const [catalogRefreshKey, setCatalogRefreshKey] = useState(0);
 
   function handleOrderCreated() {
-    setRefreshKey((k) => k + 1);
+    setOrdersRefreshKey((k) => k + 1);
+  }
+
+  function handleCatalogChanged() {
+    setCatalogRefreshKey((k) => k + 1);
   }
 
   return (
@@ -17,16 +24,18 @@ function App() {
       <h1>Order Management</h1>
 
       <h2>New order</h2>
-      <OrderForm onOrderCreated={handleOrderCreated} />
+      <OrderForm onOrderCreated={handleOrderCreated} catalogRefreshKey={catalogRefreshKey} />
 
       <h2>Orders</h2>
-      <OrderList refreshKey={refreshKey} />
+      <OrderList refreshKey={ordersRefreshKey + catalogRefreshKey} />
 
       <h2>Customers</h2>
-      <CustomerList />
+      <CustomerForm onCustomerCreated={handleCatalogChanged} />
+      <CustomerList refreshKey={catalogRefreshKey} />
 
       <h2>Products</h2>
-      <ProductList />
+      <ProductForm onProductCreated={handleCatalogChanged} />
+      <ProductList refreshKey={catalogRefreshKey} />
     </section>
   );
 }

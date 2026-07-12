@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/productsApi";
 
-export default function ProductList() {
+export default function ProductList({ refreshKey }) {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ export default function ProductList() {
       .then(setProducts)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [refreshKey]);
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p className="error">Error: {error}</p>;

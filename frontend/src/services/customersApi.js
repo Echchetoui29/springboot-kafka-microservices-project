@@ -9,3 +9,10 @@ export function getCustomers() {
 export function getCustomer(id) {
   return request(BASE_URL, `/customers/${id}`);
 }
+
+export function createCustomer(customer) {
+  return request(BASE_URL, "/customers", {
+    method: "POST",
+    body: JSON.stringify(customer),
+  });
+}

@@ -28,4 +28,17 @@ public class ProductController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @PostMapping
+    public Product create(@RequestBody Product product) {
+        if (product.getName() == null || product.getName().isBlank()) {
+            throw new IllegalArgumentException("name is required");
+        }
+        if (product.getAvailableItems() < 0) {
+            throw new IllegalArgumentException("availableItems must be >= 0");
+        }
+        product.setId(null);
+        product.setReservedItems(0);
+        return repository.save(product);
+    }
 }

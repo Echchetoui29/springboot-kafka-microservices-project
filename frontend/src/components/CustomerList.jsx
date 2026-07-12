@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCustomers } from "../services/customersApi";
 
-export default function CustomerList() {
+export default function CustomerList({ refreshKey }) {
   const [customers, setCustomers] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ export default function CustomerList() {
       .then(setCustomers)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [refreshKey]);
 
   if (loading) return <p>Loading customers...</p>;
   if (error) return <p className="error">Error: {error}</p>;
