@@ -9,3 +9,10 @@ export function getProducts() {
 export function getProduct(id) {
   return request(BASE_URL, `/products/${id}`);
 }
+
+export function createProduct(product) {
+  return request(BASE_URL, "/products", {
+    method: "POST",
+    body: JSON.stringify(product),
+  });
+}
