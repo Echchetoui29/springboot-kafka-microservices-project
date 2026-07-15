@@ -70,7 +70,7 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
       <label>
         Customer
         <select value={customerId} onChange={(e) => setCustomerId(e.target.value)} required>
-          <option value="" disabled>-- choose --</option>
+          <option value="" disabled>-- which customer? --</option>
           {customers.map((c) => (
             <option key={c.id} value={c.id}>{c.name} (available: {c.amountAvailable})</option>
           ))}
@@ -80,7 +80,7 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
       <label>
         Product
         <select value={productId} onChange={(e) => setProductId(e.target.value)} required>
-          <option value="" disabled>-- choose --</option>
+          <option value="" disabled>-- which product? --</option>
           {products.map((p) => (
             <option key={p.id} value={p.id}>{p.name} (stock: {p.availableItems})</option>
           ))}
