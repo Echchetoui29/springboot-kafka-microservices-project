@@ -22,8 +22,8 @@ export default function CustomerList({ refreshKey }) {
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th>Available</th>
-          <th>Reserved</th>
+          <th>Available balance</th>
+          <th>Reserved balance</th>
         </tr>
       </thead>
       <tbody>
