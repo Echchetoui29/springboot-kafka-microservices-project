@@ -31,11 +31,11 @@ function App() {
 
       <h2>Customers</h2>
       <CustomerForm onCustomerCreated={handleCatalogChanged} />
-      <CustomerList refreshKey={catalogRefreshKey} />
+      <CustomerList refreshKey={catalogRefreshKey + ordersRefreshKey} />
 
       <h2>Products</h2>
       <ProductForm onProductCreated={handleCatalogChanged} />
-      <ProductList refreshKey={catalogRefreshKey} />
+      <ProductList refreshKey={catalogRefreshKey + ordersRefreshKey} />
     </section>
   );
 }
