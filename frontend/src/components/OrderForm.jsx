@@ -3,6 +3,7 @@ import { getCustomers } from "../services/customersApi";
 import { getProducts } from "../services/productsApi";
 import { createOrder, getOrder } from "../services/ordersApi";
 import { useToast } from "./ToastProvider";
+import Select from "./Select";
 
 const POLL_INTERVAL_MS = 1500;
 const POLL_MAX_ATTEMPTS = 20;
@@ -50,6 +51,10 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!customerId || !productId) {
+      showToast("Select a customer and a product first");
+      return;
+    }
     setPendingOrder(null);
     setSubmitting(true);
     try {
@@ -77,22 +82,28 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
     <form onSubmit={handleSubmit}>
       <label>
         Customer
-        <select value={customerId} onChange={(e) => setCustomerId(e.target.value)} required>
-          <option value="" disabled>-- which customer? --</option>
-          {customers.map((c) => (
-            <option key={c.id} value={c.id}>{c.name} (available: {c.amountAvailable})</option>
-          ))}
-        </select>
+        <Select
+          value={customerId}
+          onChange={setCustomerId}
+          placeholder="Select a customer"
+          options={customers.map((c) => ({
+            value: c.id,
+            label: `${c.name} (available: ${c.amountAvailable})`,
+          }))}
+        />
       </label>
 
       <label>
         Product
-        <select value={productId} onChange={(e) => setProductId(e.target.value)} required>
-          <option value="" disabled>-- which product? --</option>
-          {products.map((p) => (
-            <option key={p.id} value={p.id}>{p.name} (stock: {p.availableItems})</option>
-          ))}
-        </select>
+        <Select
+          value={productId}
+          onChange={setProductId}
+          placeholder="Select a product"
+          options={products.map((p) => ({
+            value: p.id,
+            label: `${p.name} (stock: ${p.availableItems})`,
+          }))}
+        />
       </label>
 
       <label>

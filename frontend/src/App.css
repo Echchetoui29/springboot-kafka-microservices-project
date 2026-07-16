@@ -60,7 +60,6 @@ form label {
   flex: 1 1 160px;
 }
 
-form select,
 form input {
   font: inherit;
   font-size: 14px;
@@ -71,10 +70,97 @@ form input {
   color: var(--text-h);
 }
 
-form select:focus,
 form input:focus {
   outline: none;
   border-color: var(--accent);
+}
+
+/* custom select */
+
+.select {
+  position: relative;
+  width: 100%;
+}
+
+.select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+.select-trigger[aria-expanded="true"] {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.select-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select-placeholder {
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select-arrow {
+  color: var(--text-muted);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.select-list {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  margin: 0;
+  padding: var(--space-1) 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.select-option {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.select-option:hover {
+  background: var(--code-bg);
+}
+
+.select-option-selected {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.select-empty {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--text-muted);
 }
 
 form button {
