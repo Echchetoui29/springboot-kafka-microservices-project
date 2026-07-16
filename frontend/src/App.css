@@ -7,8 +7,15 @@
 
 .app-header {
   margin-bottom: var(--space-6);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--border);
+  padding: var(--space-4) var(--space-6);
+  background: var(--nav-bg);
+  border-bottom: 3px solid var(--accent);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.app-header h1 {
+  color: var(--nav-text);
 }
 
 .card {
@@ -72,7 +79,8 @@ form input {
 
 form input:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: #e77600;
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
 /* custom select */
@@ -101,7 +109,8 @@ form input:focus {
 
 .select-trigger[aria-expanded="true"] {
   outline: none;
-  border-color: var(--accent);
+  border-color: #e77600;
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
 .select-value {
@@ -153,7 +162,7 @@ form input:focus {
 }
 
 .select-option-selected {
-  color: var(--accent);
+  color: var(--link);
   font-weight: 600;
 }
 
@@ -165,20 +174,18 @@ form input:focus {
 
 form button {
   font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 14px;
+  font-weight: 500;
   padding: 8px 18px;
   border-radius: var(--radius);
-  border: 1px solid var(--accent);
-  background: var(--accent);
+  border: 1px solid var(--accent-border);
+  background: linear-gradient(to bottom, #f7dfa5, var(--accent));
   color: var(--accent-contrast);
   cursor: pointer;
   white-space: nowrap;
 
   &:hover:not(:disabled) {
-    opacity: 0.85;
+    background: var(--accent);
   }
   &:disabled {
     opacity: 0.5;
