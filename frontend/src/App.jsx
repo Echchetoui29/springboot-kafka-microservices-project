@@ -23,7 +23,6 @@ function App() {
     <section id="center">
       <header className="app-header">
         <h1>Order Management</h1>
-        <p>Kafka Streams microservices demo — orders, customers &amp; stock</p>
       </header>
 
       <section className="card">
@@ -31,25 +30,27 @@ function App() {
         <OrderForm onOrderCreated={handleOrderCreated} catalogRefreshKey={catalogRefreshKey} />
       </section>
 
+      <div className="row-split">
+        <section className="card">
+          <h2>Customers</h2>
+          <CustomerForm onCustomerCreated={handleCatalogChanged} />
+          <div className="list-wrap">
+            <CustomerList refreshKey={catalogRefreshKey + ordersRefreshKey} />
+          </div>
+        </section>
+
+        <section className="card">
+          <h2>Products</h2>
+          <ProductForm onProductCreated={handleCatalogChanged} />
+          <div className="list-wrap">
+            <ProductList refreshKey={catalogRefreshKey + ordersRefreshKey} />
+          </div>
+        </section>
+      </div>
+
       <section className="card">
         <h2>Orders</h2>
         <OrderList refreshKey={ordersRefreshKey + catalogRefreshKey} />
-      </section>
-
-      <section className="card">
-        <h2>Customers</h2>
-        <CustomerForm onCustomerCreated={handleCatalogChanged} />
-        <div className="list-wrap">
-          <CustomerList refreshKey={catalogRefreshKey + ordersRefreshKey} />
-        </div>
-      </section>
-
-      <section className="card">
-        <h2>Products</h2>
-        <ProductForm onProductCreated={handleCatalogChanged} />
-        <div className="list-wrap">
-          <ProductList refreshKey={catalogRefreshKey + ordersRefreshKey} />
-        </div>
       </section>
     </section>
   );
