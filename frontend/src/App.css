@@ -34,7 +34,7 @@
 
 .row-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 5fr;
   gap: var(--space-6);
 }
 
@@ -64,7 +64,8 @@ form label {
   font-size: 13px;
   font-weight: 500;
   color: var(--text);
-  flex: 1 1 160px;
+  flex: 1 1 110px;
+  min-width: 0;
 }
 
 form input {

@@ -118,11 +118,6 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
         />
       </label>
 
-      <label>
-        Total price
-        <input type="number" value={totalPrice} disabled />
-      </label>
-
       <button type="submit" disabled={submitting}>
         {submitting ? "Creating..." : "Create order"}
       </button>
