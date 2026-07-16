@@ -93,7 +93,7 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
           }))}
         />
       </label>
-
+ 
       <label>
         Product
         <Select
