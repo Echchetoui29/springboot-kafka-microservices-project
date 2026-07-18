@@ -15,6 +15,7 @@ backend-test:
     paths:
       - .m2/repository
   script:
+    - for m in shared orders-service payment-service stock-service; do (cd $m && mvn $MAVEN_CLI_OPTS spotless:check) || exit 1; done
     - mvn $MAVEN_CLI_OPTS test
   artifacts:
     when: always
@@ -36,6 +37,7 @@ frontend-build:
     - cd frontend
     - npm ci
     - npm run lint
+    - npm run format:check
     - npm run build
   artifacts:
     paths:
