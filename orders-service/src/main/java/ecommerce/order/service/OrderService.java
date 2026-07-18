@@ -4,5 +4,5 @@ import domain.Order;
 
 public interface OrderService {
 
-    Order confirm(Order orderPayment, Order orderStock);
+  Order confirm(Order orderPayment, Order orderStock);
 }
