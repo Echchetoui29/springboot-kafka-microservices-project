@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { createProduct } from "../services/productsApi";
-import { useToast } from "./ToastProvider";
+import { useState } from 'react';
+import { createProduct } from '../services/productsApi';
+import { useToast } from './ToastProvider';
 
 export default function ProductForm({ onProductCreated }) {
   const showToast = useToast();
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [availableItems, setAvailableItems] = useState("");
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [availableItems, setAvailableItems] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e) {
@@ -19,9 +19,9 @@ export default function ProductForm({ onProductCreated }) {
         availableItems: Number(availableItems),
       });
       onProductCreated?.(product);
-      setName("");
-      setPrice("");
-      setAvailableItems("");
+      setName('');
+      setPrice('');
+      setAvailableItems('');
     } catch (e) {
       showToast(e.message);
     } finally {
@@ -59,7 +59,7 @@ export default function ProductForm({ onProductCreated }) {
       </label>
 
       <button type="submit" disabled={submitting}>
-        {submitting ? "Adding..." : "Add product"}
+        {submitting ? 'Adding...' : 'Add product'}
       </button>
     </form>
   );

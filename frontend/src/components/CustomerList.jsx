@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getCustomers } from "../services/customersApi";
+import { useEffect, useState } from 'react';
+import { getCustomers } from '../services/customersApi';
 
 export default function CustomerList({ refreshKey }) {
   const [customers, setCustomers] = useState([]);

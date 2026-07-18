@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 export default function Select({ value, onChange, options, placeholder }) {
   const [open, setOpen] = useState(false);
@@ -10,8 +10,8 @@ export default function Select({ value, onChange, options, placeholder }) {
         setOpen(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const selected = options.find((o) => String(o.value) === String(value));
@@ -25,10 +25,12 @@ export default function Select({ value, onChange, options, placeholder }) {
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <span className={selected ? "select-value" : "select-placeholder"}>
+        <span className={selected ? 'select-value' : 'select-placeholder'}>
           {selected ? selected.label : placeholder}
         </span>
-        <span className="select-arrow" aria-hidden="true">▾</span>
+        <span className="select-arrow" aria-hidden="true">
+          ▾
+        </span>
       </button>
 
       {open && (
@@ -39,7 +41,10 @@ export default function Select({ value, onChange, options, placeholder }) {
               key={o.value}
               role="option"
               aria-selected={String(o.value) === String(value)}
-              className={"select-option" + (String(o.value) === String(value) ? " select-option-selected" : "")}
+              className={
+                'select-option' +
+                (String(o.value) === String(value) ? ' select-option-selected' : '')
+              }
               onClick={() => {
                 onChange(o.value);
                 setOpen(false);

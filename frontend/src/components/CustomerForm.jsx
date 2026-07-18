@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { createCustomer } from "../services/customersApi";
-import { useToast } from "./ToastProvider";
+import { useState } from 'react';
+import { createCustomer } from '../services/customersApi';
+import { useToast } from './ToastProvider';
 
 export default function CustomerForm({ onCustomerCreated }) {
   const showToast = useToast();
-  const [name, setName] = useState("");
-  const [amountAvailable, setAmountAvailable] = useState("");
+  const [name, setName] = useState('');
+  const [amountAvailable, setAmountAvailable] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e) {
@@ -17,8 +17,8 @@ export default function CustomerForm({ onCustomerCreated }) {
         amountAvailable: Number(amountAvailable),
       });
       onCustomerCreated?.(customer);
-      setName("");
-      setAmountAvailable("");
+      setName('');
+      setAmountAvailable('');
     } catch (e) {
       showToast(e.message);
     } finally {
@@ -45,7 +45,7 @@ export default function CustomerForm({ onCustomerCreated }) {
       </label>
 
       <button type="submit" disabled={submitting}>
-        {submitting ? "Adding..." : "Add customer"}
+        {submitting ? 'Adding...' : 'Add customer'}
       </button>
     </form>
   );

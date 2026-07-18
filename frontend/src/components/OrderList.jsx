@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { getOrders } from "../services/ordersApi";
-import { getCustomers } from "../services/customersApi";
-import { getProducts } from "../services/productsApi";
+import { useEffect, useState } from 'react';
+import { getOrders } from '../services/ordersApi';
+import { getCustomers } from '../services/customersApi';
+import { getProducts } from '../services/productsApi';
 
 const BADGE_CLASS = {
-  NEW: "badge-new",
-  CONFIRMED: "badge-confirmed",
-  REJECTED: "badge-rejected",
-  ROLLBACK: "badge-rollback",
+  NEW: 'badge-new',
+  CONFIRMED: 'badge-confirmed',
+  REJECTED: 'badge-rejected',
+  ROLLBACK: 'badge-rollback',
 };
 
 export default function OrderList({ refreshKey }) {
@@ -56,9 +56,9 @@ export default function OrderList({ refreshKey }) {
               <td>{o.productCount}</td>
               <td>{o.price}</td>
               <td>
-                <span className={`badge ${BADGE_CLASS[o.status] ?? "badge-new"}`}>{o.status}</span>
+                <span className={`badge ${BADGE_CLASS[o.status] ?? 'badge-new'}`}>{o.status}</span>
               </td>
-              <td>{o.createdAt ? new Date(o.createdAt).toLocaleString() : "-"}</td>
+              <td>{o.createdAt ? new Date(o.createdAt).toLocaleString() : '-'}</td>
             </tr>
           ))}
         </tbody>

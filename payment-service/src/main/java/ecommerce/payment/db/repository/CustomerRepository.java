@@ -1,7 +1,6 @@
 package ecommerce.payment.db.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import ecommerce.payment.db.entities.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
-}
+public interface CustomerRepository extends JpaRepository<Customer, Long> {}

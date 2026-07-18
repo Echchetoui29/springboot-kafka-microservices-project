@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getProducts } from "../services/productsApi";
+import { useEffect, useState } from 'react';
+import { getProducts } from '../services/productsApi';
 
 export default function ProductList({ refreshKey }) {
   const [products, setProducts] = useState([]);

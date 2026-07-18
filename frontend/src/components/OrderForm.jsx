@@ -1,33 +1,37 @@
-import { useEffect, useState } from "react";
-import { getCustomers } from "../services/customersApi";
-import { getProducts } from "../services/productsApi";
-import { createOrder, getOrder } from "../services/ordersApi";
-import { useToast } from "./ToastProvider";
-import Select from "./Select";
+import { useEffect, useState } from 'react';
+import { getCustomers } from '../services/customersApi';
+import { getProducts } from '../services/productsApi';
+import { createOrder, getOrder } from '../services/ordersApi';
+import { useToast } from './ToastProvider';
+import Select from './Select';
 
 const POLL_INTERVAL_MS = 1500;
 const POLL_MAX_ATTEMPTS = 20;
 
 const BADGE_CLASS = {
-  NEW: "badge-new",
-  CONFIRMED: "badge-confirmed",
-  REJECTED: "badge-rejected",
-  ROLLBACK: "badge-rollback",
+  NEW: 'badge-new',
+  CONFIRMED: 'badge-confirmed',
+  REJECTED: 'badge-rejected',
+  ROLLBACK: 'badge-rollback',
 };
 
 export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
   const showToast = useToast();
   const [customers, setCustomers] = useState([]);
   const [products, setProducts] = useState([]);
-  const [customerId, setCustomerId] = useState("");
-  const [productId, setProductId] = useState("");
+  const [customerId, setCustomerId] = useState('');
+  const [productId, setProductId] = useState('');
   const [productCount, setProductCount] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const [pendingOrder, setPendingOrder] = useState(null);
 
   useEffect(() => {
-    getCustomers().then(setCustomers).catch((e) => showToast(`Failed to load customers: ${e.message}`));
-    getProducts().then(setProducts).catch((e) => showToast(`Failed to load products: ${e.message}`));
+    getCustomers()
+      .then(setCustomers)
+      .catch((e) => showToast(`Failed to load customers: ${e.message}`));
+    getProducts()
+      .then(setProducts)
+      .catch((e) => showToast(`Failed to load products: ${e.message}`));
   }, [showToast, catalogRefreshKey]);
 
   const selectedProduct = products.find((p) => String(p.id) === String(productId));
@@ -43,18 +47,20 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
         continue;
       }
       setPendingOrder(order);
-      if (order.status !== "NEW") {
+      if (order.status !== 'NEW') {
         onOrderCreated?.(order);
         return;
       }
     }
-    showToast(`Order ${id} is still processing after ${POLL_MAX_ATTEMPTS * POLL_INTERVAL_MS / 1000}s`);
+    showToast(
+      `Order ${id} is still processing after ${(POLL_MAX_ATTEMPTS * POLL_INTERVAL_MS) / 1000}s`
+    );
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!customerId || !productId) {
-      showToast("Select a customer and a product first");
+      showToast('Select a customer and a product first');
       return;
     }
     setPendingOrder(null);
@@ -65,7 +71,7 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
         productId: Number(productId),
         productCount: Number(productCount),
         price: totalPrice,
-        status: "NEW",
+        status: 'NEW',
       });
       setPendingOrder(order);
       onOrderCreated?.(order);
@@ -80,58 +86,58 @@ export default function OrderForm({ onOrderCreated, catalogRefreshKey }) {
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <label>
-        Customer
-        <Select
-          value={customerId}
-          onChange={setCustomerId}
-          placeholder="Select a customer"
-          options={customers.map((c) => ({
-            value: c.id,
-            label: `${c.name} (available: ${c.amountAvailable})`,
-          }))}
-        />
-      </label>
- 
-      <label>
-        Product
-        <Select
-          value={productId}
-          onChange={setProductId}
-          placeholder="Select a product"
-          options={products.map((p) => ({
-            value: p.id,
-            label: `${p.name} (unit price: ${p.price}, stock: ${p.availableItems})`,
-          }))}
-        />
-      </label>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Customer
+          <Select
+            value={customerId}
+            onChange={setCustomerId}
+            placeholder="Select a customer"
+            options={customers.map((c) => ({
+              value: c.id,
+              label: `${c.name} (available: ${c.amountAvailable})`,
+            }))}
+          />
+        </label>
 
-      <label>
-        Quantity
-        <input
-          type="number"
-          min="1"
-          value={productCount}
-          onChange={(e) => setProductCount(e.target.value)}
-          required
-        />
-      </label>
+        <label>
+          Product
+          <Select
+            value={productId}
+            onChange={setProductId}
+            placeholder="Select a product"
+            options={products.map((p) => ({
+              value: p.id,
+              label: `${p.name} (unit price: ${p.price}, stock: ${p.availableItems})`,
+            }))}
+          />
+        </label>
 
-      <button type="submit" disabled={submitting}>
-        {submitting ? "Creating..." : "Create order"}
-      </button>
-    </form>
+        <label>
+          Quantity
+          <input
+            type="number"
+            min="1"
+            value={productCount}
+            onChange={(e) => setProductCount(e.target.value)}
+            required
+          />
+        </label>
 
-    {pendingOrder && (
-      <p className="muted list-wrap">
-        Order #{pendingOrder.id} —{" "}
-        <span className={`badge ${BADGE_CLASS[pendingOrder.status] ?? "badge-new"}`}>
-          {pendingOrder.status}
-        </span>
-        {pendingOrder.status === "NEW" && " (processing...)"}
-      </p>
-    )}
+        <button type="submit" disabled={submitting}>
+          {submitting ? 'Creating...' : 'Create order'}
+        </button>
+      </form>
+
+      {pendingOrder && (
+        <p className="muted list-wrap">
+          Order #{pendingOrder.id} —{' '}
+          <span className={`badge ${BADGE_CLASS[pendingOrder.status] ?? 'badge-new'}`}>
+            {pendingOrder.status}
+          </span>
+          {pendingOrder.status === 'NEW' && ' (processing...)'}
+        </p>
+      )}
     </>
   );
 }

@@ -1,11 +1,11 @@
-import { useState } from "react";
-import CustomerList from "./components/CustomerList";
-import ProductList from "./components/ProductList";
-import CustomerForm from "./components/CustomerForm";
-import ProductForm from "./components/ProductForm";
-import OrderForm from "./components/OrderForm";
-import OrderList from "./components/OrderList";
-import "./App.css";
+import { useState } from 'react';
+import CustomerList from './components/CustomerList';
+import ProductList from './components/ProductList';
+import CustomerForm from './components/CustomerForm';
+import ProductForm from './components/ProductForm';
+import OrderForm from './components/OrderForm';
+import OrderList from './components/OrderList';
+import './App.css';
 
 function App() {
   const [ordersRefreshKey, setOrdersRefreshKey] = useState(0);
@@ -25,8 +25,6 @@ function App() {
         <h1>Order Management</h1>
       </header>
 
-     
-
       <div className="row-split">
         <section className="card">
           <h2>Customers</h2>
@@ -45,7 +43,7 @@ function App() {
         </section>
       </div>
 
-       <section className="card">
+      <section className="card">
         <h2>New order</h2>
         <OrderForm onOrderCreated={handleOrderCreated} catalogRefreshKey={catalogRefreshKey} />
       </section>

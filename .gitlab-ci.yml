@@ -1,0 +1,45 @@
+stages:
+  - test
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_OPTS: "-B -ntp"
+
+backend-test:
+  stage: test
+  image: maven:3.8.7-eclipse-temurin-11
+  cache:
+    key:
+      files:
+        - pom.xml
+    paths:
+      - .m2/repository
+  script:
+    - for m in shared orders-service payment-service stock-service; do (cd $m && mvn $MAVEN_CLI_OPTS spotless:check) || exit 1; done
+    - mvn $MAVEN_CLI_OPTS test
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - "*/target/surefire-reports/TEST-*.xml"
+
+frontend-build:
+  stage: test
+  image: node:20-alpine
+  needs: []
+  cache:
+    key:
+      files:
+        - frontend/package-lock.json
+    paths:
+      - frontend/node_modules
+  script:
+    - cd frontend
+    - npm ci
+    - npm run lint
+    - npm run format:check
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist
+    expire_in: 1 hour

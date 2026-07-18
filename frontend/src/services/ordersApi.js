@@ -1,9 +1,9 @@
-import { request } from "./api";
+import { request } from './api';
 
 const BASE_URL = import.meta.env.VITE_ORDERS_API_URL;
 
 export function getOrders() {
-  return request(BASE_URL, "/orders");
+  return request(BASE_URL, '/orders');
 }
 
 export function getOrder(id) {
@@ -11,8 +11,8 @@ export function getOrder(id) {
 }
 
 export function createOrder(order) {
-  return request(BASE_URL, "/orders", {
-    method: "POST",
+  return request(BASE_URL, '/orders', {
+    method: 'POST',
     body: JSON.stringify(order),
   });
 }

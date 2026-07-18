@@ -1,6 +1,6 @@
 export async function request(baseUrl, path, options = {}) {
   const res = await fetch(`${baseUrl}${path}`, {
-    headers: { "Content-Type": "application/json" },
+    headers: { 'Content-Type': 'application/json' },
     ...options,
   });
 

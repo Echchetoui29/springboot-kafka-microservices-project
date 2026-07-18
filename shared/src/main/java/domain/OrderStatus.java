@@ -1,5 +1,10 @@
 package domain;
 
 public enum OrderStatus {
-    NEW,ACCEPT,REJECT,REJECTED,ROLLBACK,CONFIRMED
+  NEW,
+  ACCEPT,
+  REJECT,
+  REJECTED,
+  ROLLBACK,
+  CONFIRMED
 }

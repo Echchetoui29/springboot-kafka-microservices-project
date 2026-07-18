@@ -1,0 +1,9 @@
+{
+  "name": "springboot-kafka-streams-microservices-demo",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10"
+  }
+}
