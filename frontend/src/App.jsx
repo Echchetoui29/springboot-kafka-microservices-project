@@ -27,7 +27,7 @@ function App() {
 
       <div className="row-split">
         <section className="card">
-          <h3>Customers</h3>
+          <h4>Customers</h4>
           <CustomerForm onCustomerCreated={handleCatalogChanged} />
           <div className="list-wrap">
             <CustomerList refreshKey={catalogRefreshKey + ordersRefreshKey} />
@@ -35,7 +35,7 @@ function App() {
         </section>
 
         <section className="card">
-          <h3>Products</h3>
+          <h4>Products</h4>
           <ProductForm onProductCreated={handleCatalogChanged} />
           <div className="list-wrap">
             <ProductList refreshKey={catalogRefreshKey + ordersRefreshKey} />
@@ -44,12 +44,12 @@ function App() {
       </div>
 
       <section className="card">
-        <h3>New order</h3>
+        <h4>New order</h4>
         <OrderForm onOrderCreated={handleOrderCreated} catalogRefreshKey={catalogRefreshKey} />
       </section>
 
       <section className="card">
-        <h3>Orders</h3>
+        <h4>Orders</h4>
         <OrderList refreshKey={ordersRefreshKey + catalogRefreshKey} />
       </section>
     </section>
