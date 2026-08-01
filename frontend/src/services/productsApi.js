@@ -16,3 +16,16 @@ export function createProduct(product) {
     body: JSON.stringify(product),
   });
 }
+
+export function updateProduct(id, product) {
+  return request(BASE_URL, `/products/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(product),
+  });
+}
+
+export function deleteProduct(id) {
+  return request(BASE_URL, `/products/${id}`, {
+    method: 'DELETE',
+  });
+}
