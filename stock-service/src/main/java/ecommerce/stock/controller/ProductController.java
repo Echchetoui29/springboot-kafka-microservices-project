@@ -50,4 +50,46 @@ public class ProductController {
     product.setReservedItems(0);
     return repository.save(product);
   }
+
+  @PutMapping("/{id}")
+  public Product update(@PathVariable Long id, @RequestBody Product product) {
+    Product existing =
+        repository
+            .findById(id)
+            .orElseThrow(
+                () ->
+                    new ResponseStatusException(HttpStatus.NOT_FOUND, "product not found: " + id));
+
+    if (product.getName() == null || product.getName().isBlank()) {
+      throw new IllegalArgumentException("name is required");
+    }
+    if (product.getAvailableItems() < 0) {
+      throw new IllegalArgumentException("availableItems must be >= 0");
+    }
+    if (product.getPrice() <= 0) {
+      throw new IllegalArgumentException("price must be > 0");
+    }
+    repository
+        .findByName(product.getName())
+        .filter(other -> !other.getId().equals(id))
+        .ifPresent(
+            other -> {
+              throw new ResponseStatusException(
+                  HttpStatus.CONFLICT, "product already exists: " + product.getName());
+            });
+
+    existing.setName(product.getName());
+    existing.setPrice(product.getPrice());
+    existing.setAvailableItems(product.getAvailableItems());
+    return repository.save(existing);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
+    if (!repository.existsById(id)) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "product not found: " + id);
+    }
+    repository.deleteById(id);
+    return ResponseEntity.noContent().build();
+  }
 }
