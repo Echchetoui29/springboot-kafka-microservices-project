@@ -3,8 +3,10 @@ package ecommerce.stock.controller;
 import ecommerce.stock.db.entities.Product;
 import ecommerce.stock.db.repository.ProductRepository;
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RequestMapping("/products")
 @RestController
@@ -39,6 +41,10 @@ public class ProductController {
     }
     if (product.getPrice() <= 0) {
       throw new IllegalArgumentException("price must be > 0");
+    }
+    if (repository.findByName(product.getName()).isPresent()) {
+      throw new ResponseStatusException(
+          HttpStatus.CONFLICT, "product already exists: " + product.getName());
     }
     product.setId(null);
     product.setReservedItems(0);
