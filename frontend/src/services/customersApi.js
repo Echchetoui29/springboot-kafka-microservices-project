@@ -16,3 +16,16 @@ export function createCustomer(customer) {
     body: JSON.stringify(customer),
   });
 }
+
+export function updateCustomer(id, customer) {
+  return request(BASE_URL, `/customers/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(customer),
+  });
+}
+
+export function deleteCustomer(id) {
+  return request(BASE_URL, `/customers/${id}`, {
+    method: 'DELETE',
+  });
+}
